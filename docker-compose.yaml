@@ -1,12 +1,12 @@
 version: '3'
 
 networks:
-  network-subscription:
+  network-laravel-subscription:
 
 services:
   nginx:
     image: nginx:1.18.0-alpine
-    container_name: nginx-subscription
+    container_name: nginx-laravel-subscription
     ports:
       - "80:80"
     volumes:
@@ -15,10 +15,10 @@ services:
     depends_on:
       - php
     networks:
-      - network-subscription
+      - network-laravel-subscription
   php:
     build: ./docker/php-fpm
-    container_name: subscription
+    container_name: laravel-subscription
     entrypoint: /entrypoint.sh
     environment:
       CONTAINER_NAME: PHP
@@ -28,10 +28,10 @@ services:
     expose:
       - "9000"
     networks:
-      - network-subscription
+      - network-laravel-subscription
   mysql:
     image: mysql:8
-    container_name: mysql-subscription
+    container_name: mysql-laravel-subscription
     command: --innodb-use-native-aio=0
     restart: unless-stopped
     tty: true
@@ -43,12 +43,12 @@ services:
       MYSQL_PASSWORD: "${DB_PASSWORD}"
       MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
       SERVICE_TAGS: dev
-      SERVICE_NAME: mysql-subscription
+      SERVICE_NAME: mysql-laravel-subscription
     networks:
-      - network-subscription
+      - network-laravel-subscription
   phpmyadmin:
     build: docker/phpmyadmin
-    container_name: phpmyadmin-subscription
+    container_name: phpmyadmin-laravel-subscription
     environment:
       PMA_ARBITRARY: 1
     ports:
@@ -56,13 +56,13 @@ services:
     volumes:
       - .docker/phpmyadmin/data/sessions:/sessions
     networks:
-      - network-subscription
+      - network-laravel-subscription
   redis:
     image: redis:alpine3.11
-    container_name: redis-subscription
+    container_name: redis-laravel-subscription
     expose:
       - 6379
     ports:
       - "6379:6379"
     networks:
-      - network-subscription
+      - network-laravel-subscription
