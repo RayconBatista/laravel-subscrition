@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\RegisteredMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactFormRequest;
 use App\Mail\ContactSite;
@@ -12,7 +13,8 @@ class ContactController extends Controller
 {
     public function sendContact(ContactFormRequest $request)
     {
-        Mail::send(new ContactSite($request->all()));
+        event(new RegisteredMessage($request->all()));
+        // Mail::send(new ContactSite($request->all()));
 
         return response()->json([
             'message'   => 'success',
