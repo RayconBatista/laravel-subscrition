@@ -10,15 +10,13 @@ use Illuminate\Support\Facades\Mail;
 
 class SendMessageContact
 {
-    public $data;
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct(array $data)
+    public function __construct()
     {
-        $this->data = $data;
     }
 
     /**
@@ -29,7 +27,6 @@ class SendMessageContact
      */
     public function handle($event)
     {
-        $data = $event->data;
-        Mail::to(config('mail.from.address'))->send(new ContactSite($data));
+        Mail::to(config('mail.from.address'))->send(new ContactSite($event->data));
     }
 }

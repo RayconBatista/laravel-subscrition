@@ -43,12 +43,13 @@ O teste é um CRUD de lojas com vários produtos
 * [x] - Escolher planos para assinar o Laravel Cashier
 * [x] - Configurar o Vue.js no Laravel / Criar Components
 * [x] - Criar API para enviar E-mails e depois Enviar email com o Vue.js e Laravel
+* [x] - Envio de email de contato em fila
 * [x] - Adicionar Preloader e validação de checkout
 * [x] - Exibir detalhes da assinatura do stripe
 * [x] - Webhooks Stripe
 
 
-* [] - Worflow adicionado;
+<!-- * [] - Worflow adicionado; -->
 
 ## Comandos de execução
 
