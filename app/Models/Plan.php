@@ -14,8 +14,8 @@ class Plan extends Model
         return $this->hasMany(Feature::class);
     }
 
-    public function getPriceBrAtribute()
+    public function getPriceBrAttribute()
     {
-        return number_format($this->price, 2, '.', ',');
+        return number_format($this->price, 2, ',', '.');
     }
 }

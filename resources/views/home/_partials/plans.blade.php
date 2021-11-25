@@ -22,32 +22,30 @@
                             </div>
                             <!-- todo: Corrigir o formato de número para real -->
                             <div class="card__price"><span class="price-currency mr-2">R$</span>
-                                <span class="price-value">{{ $plan->price }}</span>
+                                <span class="price-value">{{ $plan->price_br }}</span>
                                 <span class="price-period"><span class="px-1">/</span>
                                 <span>Mês</span></span></div>
                         </div>
                         <div class="card__features">
-                            <template>
-                                <p class="feature"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg> <span x-text="feature"></span></p>
-                            </template>
                             @foreach($plan->features as $feature)
                             <p class="feature">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg> 
-                                <span x-text="feature">{{ $feature->name }}</span>
+                                <span >{{ $feature->name }}</span>
                             </p>
                             @endforeach
                         </div>
-                        <div class="card__footer text-center my-4"><a href="{{ route('choice.plan', $plan->url) }}"
-                                class="button button--filled button--primary">Assinar Agora Mesmo<svg
+                        <div class="card__footer text-center my-4">
+                            <a href="{{ route('choice.plan', $plan->url) }}" class="button button--filled button--primary">
+                                Assinar Agora Mesmo
+                                <svg
                                     class="w-4 h-4 ml-2" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                </svg></a></div>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 @endforeach

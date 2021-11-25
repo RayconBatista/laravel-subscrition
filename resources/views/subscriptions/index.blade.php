@@ -17,8 +17,6 @@
                     <form action="{{ route('subscriptions.store') }}" method="post" id="form">
                         @csrf
 
-                        
-
                         <div class="col-span-6 sm:col-span-4 py-2">
                             <input type="text" name="card-holder-name" id="card-holder-name" placeholder="Nome no cartão" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
                         </div>
@@ -49,6 +47,7 @@ const cardHolderName = document.getElementById('card-holder-name')
 const cardButton = document.getElementById('card-buttom')
 const clientSecret = cardButton.dataset.secret
 const showErrors = document.getElementById('show-errors')
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault()
     // Disable button

@@ -10,7 +10,6 @@ class SiteController extends Controller
     public function index(Plan $plan)
     {
         $plans = $plan->with('features')->get();
-        // dd($plans);
         return view('home.index', [
             'plans' => $plans
         ]);
