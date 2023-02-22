@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Subscription;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class SubscriptionController extends Controller
@@ -16,7 +17,7 @@ class SubscriptionController extends Controller
     public function index(Request $request)
     {
         return view('subscriptions.index', [
-            'intent'    => auth()->user()->createSetupIntent(),
+            'intent'    => auth()->user()?->createSetupIntent(),
             'plan'      => session('plan')
         ]);
     }
@@ -24,7 +25,7 @@ class SubscriptionController extends Controller
     public function store(Request $request)
     {
         $plan = session('plan');
-        if(auth()->user()->subscribed('default'))
+        if(auth()->user()?->subscribed('default'))
         {
             return redirect()->route('subscriptions.premium');
         }
@@ -44,25 +45,19 @@ class SubscriptionController extends Controller
     public function account()
     {
         $user           = auth()->user();
-        $invoices       = $user->invoices();
-        $subscription   = $user->subscription('default');
+        $invoices       = $user?->invoices();
+        $subscription   = $user?->subscription('default');
 
-return view('subscriptions.account', [
+        return view('subscriptions.account', [
             'user'          => $user,
             'invoices'      => $invoices,
             'subscription'  => $subscription,
         ]);
-
-        // return view('subscriptions.account', [
-        //     'user'          => $user,
-        //     'invoices'      => $invoices,
-        //     'subscription'  => $subscription,
-        // ]);
     }
 
     public function invoiceDownload($invoiceId)
     {
-        return Auth::user()->downloadInvoice($invoiceId, [
+        return Auth::user()?->downloadInvoice($invoiceId, [
             'vendor'    => config('app.name'),
             'product'   => 'Assinatura VIP'
         ]);
@@ -70,14 +65,14 @@ return view('subscriptions.account', [
 
     public function cancel()
     {
-        auth()->user()->subscription('default')->cancel();
+        auth()->user()?->subscription('default')?->cancel();
 
         return redirect()->route('subscriptions.account');
     }
 
     public function resume()
     {
-        auth()->user()->subscription('default')->resume();
+        auth()->user()?->subscription('default')?->resume();
 
         return redirect()->route('subscriptions.account');
     }
