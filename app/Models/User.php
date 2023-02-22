@@ -44,11 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getAccessEndAttribute()
+    public function getAccessEndAttribute(): ?string
     {
         $accessEndAt = $this->subscription('default')->ends_at;
 
-        return Carbon::make($accessEndAt)->format("d/m/Y à\s H:i:s");
+        return Carbon::make($accessEndAt)?->format("d/m/Y à\s H:i:s");
     }
 
     public function plan()

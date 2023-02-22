@@ -1,16 +1,26 @@
-# Teste Laravel Pleno
-O teste é um CRUD de lojas com vários produtos
+# Sistema de assinatura
+O sistema foi construído utilizando o framework Laravel e a biblioteca Stripe para processar os pagamentos das assinaturas.
 
+Algumas das principais funcionalidades do sistema de assinaturas incluem:
+* [x] Registro e autenticação de usuários
+* [x] Planos de assinatura mensal
+* [x] Processamento de pagamentos com cartão de crédito ou débito
+* [x] Página de perfil do usuário para gerenciar informações da conta e cancelar a assinatura
+* [ ] Controle de acesso aos cursos com base no plano de assinatura
+
+
+## Ferramentas utilizadas
 <table style="width:100%">
     <thead>
       <tr>
         <th></th>
         <th>Ambiente de trabalho</th>
+        <th>Documentação</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><img src="https://www.docker.com/sites/default/files/d8/2019-07/Moby-logo.png" width="50" alt="docker"></td>
+        <td><img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" width="50" alt="docker"></td>
         <td>Docker</td>
         <td><a target="_blank" href="https://www.docker.com/">https://www.docker.com/</a></td>
       </tr>   
@@ -23,35 +33,18 @@ O teste é um CRUD de lojas com vários produtos
         <td><img src="https://seeklogo.com/images/I/insomnia-logo-A35E09EB19-seeklogo.com.png" width="50" alt="insomnia"></td>
         <td>Insomnia</td>
         <td><a target="_blank" href="https://insomnia.rest/">https://insomnia.rest/</a></td>
-      </tr>    
+      </tr>
+      <tr>
+        <td><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1200px-Stripe_Logo%2C_revised_2016.svg.png" width="50" alt="Stripe Api"/></td>
+        <td>Stripe</td>
+        <td><a target="_blank" href="https://stripe.com/docs/">https://stripe.com/docs/</a></td>
+      </tr>
     </tbody>
 </table>
 
-## Características da aplicação
-<!-- * [] - Testes unitários e de integração -->
-* [x] - Aunteticação
-* [x] - Construção de frontend
-* [x] - Intalação e configuração do Laravel Cashier
-* [x] - CRUD Assinatura
-* [x] - Configurar Checkout do stripe
-* [x] - Gerar token de cartão do stripe
-* [x] - Verificar se o Usuário é assinante e depois o middleware dele
-* [x] - Exibir faturas do stripe com o Laravel
-* [x] - Cancelar e reativar assinatura Laravel Cashier
-* [x] - Home do site
-* [x] - Planos de forma dinâmica
-* [x] - Escolher planos para assinar o Laravel Cashier
-* [x] - Configurar o Vue.js no Laravel / Criar Components
-* [x] - Criar API para enviar E-mails e depois Enviar email com o Vue.js e Laravel
-* [x] - Envio de email de contato em fila
-* [x] - Adicionar Preloader e validação de checkout
-* [x] - Exibir detalhes da assinatura do stripe
-* [x] - Webhooks Stripe
-
-
-<!-- * [] - Worflow adicionado; -->
-
 ## Comandos de execução
+
+### Execução do docker
 
 - Para iniciar o projeto pela primeira vez, execute:
 ```
@@ -61,7 +54,53 @@ O teste é um CRUD de lojas com vários produtos
 ```
     docker-compose up -d
 ```
+- Para acessar os container, execute:
+```
+    docker-compose exec app bash
+```
 - Para derrubar os container, execute:
 ```
     docker-compose down
 ```
+
+### Instalação
+1. Clone o repositório:
+```
+    git clone https://github.com/RayconBatista/laravel-subscrition.git
+```
+
+#### Siga essas instruções dentro do container App:
+2. Após o 1º build ou a execução do docker, instale as dependências dentro do container App:
+```
+    composer install
+```
+
+3. Crie um arquivo .env com as informações do seu banco de dados:
+```
+    cp .env.example .env
+```
+
+4. Gere uma nova chave para a aplicação:
+```
+    php artisan key:generate
+```
+
+5. Execute as migrações do banco de dados:
+```
+    php artisan migrate
+```
+
+### Comandos Adicionais
+6. Para facilitar no cadastro de planos e registrar diretamente no Stripe, execute:
+```
+    php artisan stripe:RegisterPlan
+```
+
+
+### Agradecimentos
+Gostaría de agradecer ao [EspecializaTI](https://academy.especializati.com.br)  por ter proposto este projeto educacional onde seu intuito é demonstrar como desenvolver 
+uma plataforma de assinatura que possa servir como um microsserviço no futuro foi muito valioso para nós e para toda a comunidade 
+que utiliza a linguagem de programação Laravel.
+
+Agradeço também pela oportunidade de trabalhar em um projeto real e prático, 
+que proporcionou uma experiência valiosa de aprendizado e aprimoramento das nossas habilidades de desenvolvimento de software.
